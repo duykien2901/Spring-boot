@@ -1,7 +1,9 @@
 package com.example.demo.config;
 
+import io.jsonwebtoken.ExpiredJwtException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -45,8 +47,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
                 }
             }
-        } catch (Exception e) {
-            log.error("failed on set user authentication", e);
+        } catch (ExpiredJwtException e) {  // Jwt đã hét hạn
+            request.setAttribute("exception", e);
+            throw e;
+        } catch (BadCredentialsException e) {
+            request.setAttribute("exception", e);
+            throw e;
         }
 
         filterChain.doFilter(request, response);
