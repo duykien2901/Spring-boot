@@ -20,7 +20,7 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
          response.setStatus(HttpServletResponse.SC_UNAUTHORIZED); // status unAuthor
-         response.setContentType(MediaType.APPLICATION_JSON_VALUE);  // json type
+//         response.setContentType(MediaType.APPLICATION_JSON_VALUE);  // json type
 
          String message;
          final Exception exception = (Exception) request.getAttribute("exception");

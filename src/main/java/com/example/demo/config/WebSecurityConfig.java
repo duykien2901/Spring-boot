@@ -57,7 +57,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .disable()// ngăn chặn truy cập từ domain khác
                 .authorizeRequests()
                     .antMatchers("/api/login").permitAll() // Cho phép tất cả mọi người truy cập vào địa chỉ này
-                .anyRequest().authenticated()
+                .anyRequest().permitAll()
                 // Return message 401 error unAuthen
                 .and().exceptionHandling().authenticationEntryPoint(authenticationEntryPoint)
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS); // Tất cả các request khác đều cần phải xác thực mới được truy cập
