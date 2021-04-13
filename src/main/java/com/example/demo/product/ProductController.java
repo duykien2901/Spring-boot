@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class ProductController {
     @Autowired
     ProductServices productServices;
@@ -47,7 +48,9 @@ public class ProductController {
 
     @GetMapping("/api/v1/products/{id}")
     public ResponseEntity<ProductEntity> findById(@PathVariable("id") int id) {
-        return ResponseEntity.ok(productServices.findById(id));
+        ProductEntity productEntity = productServices.findById(id);
+        return ResponseEntity.ok(productEntity);
+
     }
 
     //Page

@@ -1,5 +1,6 @@
 package com.example.demo.product;
 
+import com.example.demo.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -22,14 +23,15 @@ public class ProductServices {
         return productRepository.findAllQuery();
     }
 
-    public ProductEntity findById(int id) {
+    public ProductEntity findById(int id) throws NotFoundException{
+
         List<ProductEntity> list = productRepository.findAll();
         for(ProductEntity productEntity: list) {
             if(productEntity.getID() == id) {
                 return productEntity;
             }
         }
-        return null;
+        throw new NotFoundException("not found");
     }
 
     public ProductEntity addKK(ProductEntity productEntity) {
